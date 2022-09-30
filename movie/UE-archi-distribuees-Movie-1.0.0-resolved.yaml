@@ -192,20 +192,46 @@ paths:
           description: rate updated
         "400":
           description: movie ID not found
+  /moviesbydirector:
+    get:
+      tags:
+      - developers
+      summary: get movies by its director
+      description: |
+        By passing in the appropriate options, you can get movies for a director
+      operationId: get_movies_bydirector
+      parameters:
+      - name: director
+        in: query
+        description: pass a director
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      responses:
+        "200":
+          description: Movie item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieID'
+        "400":
+          description: bad input parameter
 components:
   schemas:
     MovieID:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/MovieItem'
+      type: array
+      items:
+            $ref: '#/components/schemas/MovieItem'
     MovieItem:
       required:
       - director
       - rating
       - title
+      - id
       type: object
       properties:
         title:
@@ -217,3 +243,6 @@ components:
         director:
           type: string
           example: Paul McGuigan
+        id:
+          type: string
+          example: 720d006c-3a57-4b6a-b18f-9b713b073f3c

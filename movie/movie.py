@@ -82,6 +82,21 @@ def del_movie(movieid):
     res = make_response(jsonify({"error":"movie ID not found"}),400)
     return res
 
+@app.route("/moviesbydirector", methods=['GET'])
+def get_movies_bydirector():
+    json = []
+    if request.args:
+        req = request.args
+        for movie in movies:
+            if str(movie["director"]) == str(req["director"]):
+                json.append(movie)
+
+    if len(json) == 0:
+        res = make_response(jsonify({"error":"movies for director not found"}),400)
+    else:
+        res = make_response(jsonify(json),200)
+    return res
+
 if __name__ == "__main__":
     #p = sys.argv[1]
     print("Server running in port %s"%(PORT))
