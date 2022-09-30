@@ -131,7 +131,7 @@ paths:
           description: item deleted
         "400":
           description: ID not found
-  /titles:
+  /moviesbytitle:
     get:
       tags:
       - developers
