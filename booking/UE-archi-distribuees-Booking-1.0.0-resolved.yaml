@@ -109,6 +109,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookingsUser'
+        "400":
+          description: schedule does not exist
         "409":
           description: an existing item already exists
 components:
