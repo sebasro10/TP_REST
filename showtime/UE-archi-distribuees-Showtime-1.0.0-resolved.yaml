@@ -10,10 +10,8 @@ info:
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/UE-archi-distribuees/Showtime/1.0.0
-  description: SwaggerHub API Auto Mocking
-- url: https://virtserver.swaggerhub.com/UE-archi-distribuees/Movie/1.0.0
-  description: SwaggerHub API Auto Mocking
+- url: http://localhost:3202
+  description: For local tests
 tags:
 - name: admins
   description: Secured Admin-only calls
@@ -103,4 +101,4 @@ components:
           type: array
           items:
             type: string
-            example: 720d006c-3a57-4b6a-b18f-9b713b073f3c
+            example: tt0108052

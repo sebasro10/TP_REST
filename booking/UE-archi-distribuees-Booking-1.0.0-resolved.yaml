@@ -10,10 +10,8 @@ info:
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/UE-archi-distribuees/Booking/1.0.0
-  description: SwaggerHub API Auto Mocking
-- url: https://virtserver.swaggerhub.com/UE-archi-distribuees/Movie/1.0.0
-  description: SwaggerHub API Auto Mocking
+- url: http://localhost:3201
+  description: For local tests
 tags:
 - name: admins
   description: Secured Admin-only calls
@@ -145,7 +143,7 @@ components:
           type: array
           items:
             type: string
-            example: 276c79ec-a26a-40a6-b3d3-fb242a5947b6
+            example: tt0068646
     NewMovie:
       required:
       - date
@@ -157,4 +155,4 @@ components:
           example: "20151201"
         movieid:
           type: string
-          example: 276c79ec-a26a-40a6-b3d3-fb242a5947b6
+          example: tt0068646
