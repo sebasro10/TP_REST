@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, make_response
+import requests
 import json
 import sys
 from werkzeug.exceptions import NotFound
@@ -8,8 +9,15 @@ app = Flask(__name__)
 PORT = 3200
 HOST = '0.0.0.0'
 
-with open('{}/databases/movies.json'.format("."), "r") as jsf:
-   movies = json.load(jsf)["movies"]
+moviesImdb = requests.get('https://imdb-api.com/API/Top250Movies/k_oz7jxxdv').json()["items"]
+movies = []
+for movie in moviesImdb:
+    movies.append({
+      "title": movie["title"],
+      "rating": float(movie["imDbRating"]),
+      "director": movie["crew"],
+      "id": movie["id"]
+    })
 
 # root message
 @app.route("/", methods=['GET'])
