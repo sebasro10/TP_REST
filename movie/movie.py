@@ -61,16 +61,17 @@ def create_movie(movieid):
     res = make_response(jsonify({"message":"movie added"}),200)
     return res
 
-@app.route("/movies/<movieid>/<rate>", methods=['PUT'])
-def update_movie_rating(movieid, rate):
-    for movie in movies:
-        if str(movie["id"]) == str(movieid):
-            movie["rating"] = int(rate)
-            res = make_response(jsonify(movie),200)
-            return res
+@app.route("/movies/<movieid>", methods=['PUT'])
+def update_movie_rating(movieid):
+    if request.args and int(request.args["rate"]):
+        for movie in movies:
+            if str(movie["id"]) == str(movieid):
+                movie["rating"] = int(request.args["rate"])
+                res = make_response(jsonify(movie),200)
+                return res
+        return make_response(jsonify({"error":"movie ID not found"}),400)
 
-    res = make_response(jsonify({"error":"movie ID not found"}),201)
-    return res
+    return make_response(jsonify({"error":"QueryParam rate is requiered"}),400)
 
 @app.route("/movies/<movieid>", methods=['DELETE'])
 def del_movie(movieid):

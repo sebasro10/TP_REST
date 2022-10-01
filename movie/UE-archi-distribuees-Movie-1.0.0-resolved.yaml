@@ -109,6 +109,38 @@ paths:
                 $ref: '#/components/schemas/MovieItem'
         "409":
           description: an existing item already exists
+    put:
+      tags:
+      - admins
+      summary: update a movie rate
+      description: update the rating of a movie
+      operationId: update_movie_rating
+      parameters:
+      - name: movieid
+        in: path
+        description: Movie ID.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          maximum: 1
+          minimum: 1
+          type: string
+      - name: rate
+        in: query
+        description: Movie rating.
+        required: true
+        style: form
+        explode: false
+        schema:
+          maximum: 10
+          minimum: 0
+          type: integer
+      responses:
+        "200":
+          description: rate updated
+        "400":
+          description: movie ID not found or QueryParam rate is requiered
     delete:
       tags:
       - admins
@@ -159,39 +191,6 @@ paths:
                 $ref: '#/components/schemas/MovieItem'
         "400":
           description: bad input parameter
-  /movies/{movieid}/{rate}:
-    put:
-      tags:
-      - admins
-      summary: update a movie rate
-      description: update the rating of a movie
-      operationId: update_movie_rating
-      parameters:
-      - name: movieid
-        in: path
-        description: Movie ID.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maximum: 1
-          minimum: 1
-          type: string
-      - name: rate
-        in: path
-        description: Movie rating.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          maximum: 10
-          minimum: 0
-          type: integer
-      responses:
-        "200":
-          description: rate updated
-        "400":
-          description: movie ID not found
   /moviesbydirector:
     get:
       tags:
@@ -225,7 +224,7 @@ components:
     MovieID:
       type: array
       items:
-            $ref: '#/components/schemas/MovieItem'
+          $ref: '#/components/schemas/MovieItem'
     MovieItem:
       required:
       - director
