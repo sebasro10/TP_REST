@@ -20,7 +20,7 @@ def get_json():
    return res
 
 @app.route("/showmovies/<date>", methods=['GET'])
-def get_movie_bydate(date):
+def get_movies_bydate(date):
    for time in schedule:
       if str(time["date"]) == str(date):
          res = make_response(jsonify(time),200)
